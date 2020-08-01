@@ -1,41 +1,23 @@
-﻿using NinjaApp.Data;
-using NinjaApp.Domain;
-using System.Linq;
+﻿using NinjaApp1.Data;
 using System;
+using System.Linq;
 
-namespace NinjaAppConsole
+namespace ConsoleApp1
 {
-   internal class Program
+    class Program
     {
-        private static NinjasContext context = new NinjasContext();
-       private static void Main(string[] args)
+
+        static void Main(string[] args)
         {
-            context.Database.EnsureCreated();
-            GetNinjas("Before Add:");
-            AddNinjas();
-            GetNinjas("After Add:");
+            AllotmentdbContext allot = new AllotmentdbContext();
 
-            Console.WriteLine("Press any Key...");
-            Console.ReadKey();
-
-        }
-        private static void AddNinjas()
-        {
-            var Ninja = new Ninja { Name = "SELVA" };
-            context.Ninjas.Add(Ninja);
-            context.SaveChanges();
-
-
-        }
-        private static void GetNinjas(string text)
-        {
-            var Ninjas = context.Ninjas.ToList();
-            Console.WriteLine($"{text}: Ninjas Count is {Ninjas.Count}");
-            foreach(var ninja in Ninjas)
+            var v = allot.CollegeCodes.Where(a => a.Distirct.ToLower() == "chennai");
+            foreach( var c in v)
             {
-                Console.WriteLine(ninja.Name);
+                Console.WriteLine(c.NameOfTheCollege);
             }
+            Console.WriteLine("Hello World!");
+            Console.ReadLine();
         }
-
     }
 }
